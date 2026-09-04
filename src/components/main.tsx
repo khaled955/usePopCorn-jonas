@@ -3,7 +3,7 @@ import type { Movie, WatchedMovie } from "../types/movie.type";
 import Summary from "./summary";
 import WatchedList from "./watched-list";
 import MovieList from "./movie-list";
-import ListBox from "./list-box";
+import Box from "./box";
 type MainProps = {
   movies: Movie[];
   watched: WatchedMovie[];
@@ -16,18 +16,18 @@ export default function Main({ movies, watched }: MainProps) {
 
   return (
     <main className="main">
-        {/* Movie list box on left */}
-      <ListBox isOpen={isOpen1} setIsOpen={setIsOpen1}>
+      {/* Movie list box on left */}
+      <Box isOpen={isOpen1} setIsOpen={setIsOpen1}>
         <MovieList movies={movies} />
-      </ListBox>
+      </Box>
 
-{/* Watched movie list box on right */}
-      <ListBox isOpen={isOpen2} setIsOpen={setIsOpen2}>
+      {/* Watched movie list box on right */}
+      <Box isOpen={isOpen2} setIsOpen={setIsOpen2}>
         <>
           <Summary watched={watched} />
           <WatchedList watched={watched} />
         </>
-      </ListBox>
+      </Box>
     </main>
   );
 }
