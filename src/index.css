@@ -50,13 +50,59 @@ body {
   justify-content: center;
 }
 
+/* Scrollbar width */
+.box::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+/* Scrollbar track */
+.box::-webkit-scrollbar-track {
+  background: var(--color-background-900);
+  border-radius: 10px;
+}
+
+/* Scrollbar thumb */
+.box::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+/* Hover */
+.box::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
+}
+
 .box {
   width: 42rem;
   max-width: 42rem;
   background-color: var(--color-background-500);
   border-radius: 0.9rem;
-  /* overflow: auto; */
+  overflow-y: auto;
+  overflow-x: hidden;
   position: relative;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-primary) var(--color-background-900);
+}
+
+/* Chrome, Edge, Safari */
+.box::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+.box::-webkit-scrollbar-track {
+  background: var(--color-background-900);
+  border-radius: 10px;
+}
+
+.box::-webkit-scrollbar-thumb {
+  background: var(--color-primary);
+  border-radius: 10px;
+}
+
+.box::-webkit-scrollbar-thumb:hover {
+  background: var(--color-primary-light);
 }
 
 .loader {
@@ -556,4 +602,75 @@ body {
   .rating {
     padding: 1.6rem;
   }
+}
+
+/* Movie Skeleton */
+
+.movie-skeleton {
+  pointer-events: none;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-background-100) 25%,
+    #495057 50%,
+    var(--color-background-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 0.4rem;
+}
+
+.skeleton-poster {
+  width: 4rem;
+  height: 6rem;
+  grid-row: 1 / -1;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 1.8rem;
+}
+
+.skeleton-year-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.skeleton-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.skeleton-year {
+  width: 5rem;
+  height: 1.4rem;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  padding: 4.8rem;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-text-dark);
+}
+
+.empty span {
+  font-size: 4rem;
 }

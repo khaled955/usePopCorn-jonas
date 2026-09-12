@@ -1,12 +1,9 @@
+type MovieType = "movie" | "series" | "episode";
+
 export type Movie = {
-  imdbID: string;
   Title: string;
   Year: string;
+  imdbID: string;
+  Type: MovieType;
   Poster: string;
-};
-
-export type WatchedMovie = Movie & {
-  runtime: number;
-  imdbRating: number;
-  userRating: number;
 };

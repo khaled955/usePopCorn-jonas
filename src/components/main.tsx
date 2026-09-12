@@ -1,15 +1,25 @@
 import { useState } from "react";
-import type { Movie, WatchedMovie } from "../types/movie.type";
+import type { Movie } from "../types/movie.type";
 import Summary from "./summary";
 import WatchedList from "./watched-list";
 import MovieList from "./movie-list";
 import Box from "./box";
+import ErrorMessage from "./error-message";
+import MovieListSkeleton from "./movie-list-skeleton";
+import EmptyMovies from "./empty-movies";
 type MainProps = {
   movies: Movie[];
-  watched: WatchedMovie[];
+  watched: [];
+  loading: boolean;
+  error: string | null;
 };
 
-export default function Main({ movies, watched }: MainProps) {
+export default function Main({
+  movies,
+  watched,
+  loading,
+  error,
+}: MainProps & { loading: boolean }) {
   // States
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
@@ -18,7 +28,14 @@ export default function Main({ movies, watched }: MainProps) {
     <main className="main">
       {/* Movie list box on left */}
       <Box isOpen={isOpen1} setIsOpen={setIsOpen1}>
-        <MovieList movies={movies} />
+        {loading && <MovieListSkeleton />}
+        {!loading && error && <ErrorMessage message={error} />}
+        {!loading && !error && movies.length === 0 && (
+          <EmptyMovies message="No movies found please search new movie" />
+        )}
+        {!loading && !error && movies.length > 0 && (
+          <MovieList movies={movies} />
+        )}
       </Box>
 
       {/* Watched movie list box on right */}

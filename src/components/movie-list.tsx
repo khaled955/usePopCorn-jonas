@@ -3,8 +3,10 @@ import MovieCard from "./movie-card";
 
 type MovieListProps = {
   movies: Movie[];
+  
 };
 export default function MovieList({ movies }: MovieListProps) {
+ 
   return (
     <ul className="list">
       {movies?.map((movie) => (

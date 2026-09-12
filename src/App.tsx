@@ -1,16 +1,47 @@
-import { useState } from "react";
-import type { Movie, WatchedMovie } from "./types/movie.type";
-import { tempWatchedData, tempMovieData } from "./data/movie.data";
+import { useEffect, useState } from "react";
+import type { Movie } from "./types/movie.type";
+import { tempWatchedData } from "./data/movie.data";
 import Navbar from "./components/navbar";
 import Main from "./components/main";
 import NumResults from "./components/num-results";
 import Search from "./components/search";
 import Logo from "./components/logo";
+import { fetchMovie } from "./services/movie-api.service";
 
 export default function App() {
-  const [query, setQuery] = useState("");
-  const [movies] = useState<Movie[]>(tempMovieData);
-  const [watched] = useState<WatchedMovie[]>(tempWatchedData);
+  // States
+  const [query, setQuery] = useState("batman");
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [watched] = useState(tempWatchedData);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  // Effects
+  useEffect(() => {
+    async function fetchData() {
+      // Guard clause to prevent unnecessary API calls for short queries
+      if (query.trim().length < 3) {
+        setMovies([]);
+        setError(null);
+        return;
+      }
+
+      try {
+        setLoading(true);
+        setError(null);
+        const movies = await fetchMovie(query);
+        setMovies(movies);
+      } catch (error) {
+        if (error instanceof Error) {
+          setError(error.message);
+        }
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    fetchData();
+  }, [query]);
 
   return (
     <>
@@ -22,8 +53,7 @@ export default function App() {
         </>
       </Navbar>
 
-
-      <Main movies={movies} watched={watched} />
+      <Main movies={movies} watched={watched} loading={loading} error={error} />
     </>
   );
 }
