@@ -4,22 +4,46 @@ import type { MovieDetails, WatchedMovie } from "../types/movie.type";
 import StarRating from "./star-rating";
 import MovieDetailsSkeleton from "../skeletons/movie-details-skeleton";
 import ErrorMessage from "./error-message";
+import type { WatchedMovie as WatchedMovieType } from "../types/movie.type";
 
 type SelectedMovieProps = {
   selectedId: string | null;
   onCloseMovie: () => void;
   onAddWatchedMovie: (watchedMovie: WatchedMovie) => void;
+  watchedMovie: WatchedMovieType[];
 };
 export default function MovieDetails({
   selectedId,
   onCloseMovie,
   onAddWatchedMovie,
+  watchedMovie,
 }: SelectedMovieProps) {
   // States
   const [movieDetails, setMovieDetails] = useState<MovieDetails | null>(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [rating, setRating] = useState(0);
+
+
+
+  // Handlers
+  function handleAddWatchedMovie() {
+    const newMovie = {
+      Poster,
+      runTime: Number(Runtime.split(" ").at(0)) || 0,
+      Title,
+      imdbRating: Number(imdbRating),
+      imdbID: selectedId!,
+      userRating: rating,
+    };
+
+    onAddWatchedMovie(newMovie);
+    onCloseMovie();
+  }
+
+
+
+
 
 
   // Effects
@@ -61,21 +85,10 @@ export default function MovieDetails({
     Director,
     Genre,
   } = movieDetails;
+  const isRatedBefore = watchedMovie.find(
+    (movie) => movie.imdbID === selectedId,
+  );
 
-  // Handlers
-  function handleAddWatchedMovie() {
-    const newMovie = {
-      Poster,
-      runTime: Number(Runtime.split(" ").at(0)) || 0,
-      Title,
-      imdbRating: Number(imdbRating),
-      imdbID: selectedId!,
-      userRating: rating,
-    };
-
-    onAddWatchedMovie(newMovie);
-    onCloseMovie();
-  }
 
   return (
     <div className="details">
@@ -97,13 +110,24 @@ export default function MovieDetails({
         </div>
       </header>
 
+
       <section>
         {/* Rating */}
         <div className="rating">
-          <StarRating maxRating={10} size={24} onSetRating={setRating} />
-          <button className="btn-add" onClick={handleAddWatchedMovie}>
-            + Add to list
-          </button>
+          {isRatedBefore ? (
+            <span>
+              You rated <strong>{Title}</strong> before {isRatedBefore.userRating} <span>⭐</span>
+            </span>
+          ) : (
+            <>
+              <StarRating maxRating={10} size={24} onSetRating={setRating} />
+              {rating > 0 && (
+                <button className="btn-add" onClick={handleAddWatchedMovie}>
+                  + Add to list
+                </button>
+              )}
+            </>
+          )}
         </div>
         <p>
           <em>{Plot}</em>

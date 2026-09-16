@@ -237,7 +237,7 @@ body {
 
 .btn-delete {
   position: absolute;
-  right: 2.4rem;
+  right: 5px;
 
   height: 1.8rem;
   aspect-ratio: 1;

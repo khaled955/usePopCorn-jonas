@@ -17,7 +17,7 @@ export default function Statistics({
       </p>
       <p>
         <span>🌟</span>
-        <span>{userRating}</span>
+        <span>{userRating.toFixed(2)}</span>
       </p>
       <p>
         <span>⏳</span>

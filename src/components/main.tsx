@@ -23,7 +23,7 @@ export default function Main({ movies, loading, error }: MainProps) {
   const [selectedId, setSelectedId] = useState<string | null>(null);
 
   // Hooks
-  const { addWatchedMovie, watched } = useWatchedMovies();
+  const { addWatchedMovie, watched,deleteWatchedMovie } = useWatchedMovies();
   // Handles
   function handleSelectMovie(id: string | null) {
     setSelectedId((currentId) => (currentId === id ? null : id));
@@ -33,10 +33,7 @@ export default function Main({ movies, loading, error }: MainProps) {
     setSelectedId(null);
   }
 
-  // function handleAddWatchedMovie(watchedMovie: WatchedMovie) {
-  //   setWatched((watched) => [...watched, watchedMovie]);
-  // }
-
+ 
   return (
     <main className="main">
       {/* Movie list box on left */}
@@ -59,11 +56,12 @@ export default function Main({ movies, loading, error }: MainProps) {
               selectedId={selectedId}
               onCloseMovie={handleCloseMovie}
               onAddWatchedMovie={addWatchedMovie}
+              watchedMovie={watched}
             />
           ) : (
             <>
               <Summary watched={watched} />
-              <WatchedList watched={watched} />
+              <WatchedList watched={watched} onDeleteMovie={deleteWatchedMovie} />
             </>
           )}
         </>
