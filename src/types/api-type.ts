@@ -1,16 +1,10 @@
-import type { Movie } from "./movie.type";
-
-export type MovieSearchSuccessResponse = {
-  Search: Movie[];
-  totalResults: string;
+export type ApiSuccessResponse<T> = {
   Response: "True";
-};
+} & T;
 
-export type MovieSearchErrorResponse = {
+export type ApiErrorResponse = {
   Response: "False";
   Error: string;
 };
 
-export type MovieSearchResponse =
-  | MovieSearchSuccessResponse
-  | MovieSearchErrorResponse;
+export type ApiResponse<T> = ApiSuccessResponse<T> | ApiErrorResponse;

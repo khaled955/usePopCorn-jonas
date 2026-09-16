@@ -7,22 +7,35 @@ import Box from "./box";
 import ErrorMessage from "./error-message";
 import MovieListSkeleton from "./movie-list-skeleton";
 import EmptyMovies from "./empty-movies";
+import MovieDetails from "./movie-details";
+import { useWatchedMovies } from "../hooks/use-watched-movies";
 type MainProps = {
   movies: Movie[];
-  watched: [];
   loading: boolean;
   error: string | null;
 };
 
-export default function Main({
-  movies,
-  watched,
-  loading,
-  error,
-}: MainProps & { loading: boolean }) {
-  // States
+export default function Main({ movies, loading, error }: MainProps) {
+  // State
   const [isOpen1, setIsOpen1] = useState(true);
   const [isOpen2, setIsOpen2] = useState(true);
+  // const [watched, setWatched] = useState<WatchedMovie[]>([]);
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+
+  // Hooks
+  const { addWatchedMovie, watched } = useWatchedMovies();
+  // Handles
+  function handleSelectMovie(id: string | null) {
+    setSelectedId((currentId) => (currentId === id ? null : id));
+  }
+
+  function handleCloseMovie() {
+    setSelectedId(null);
+  }
+
+  // function handleAddWatchedMovie(watchedMovie: WatchedMovie) {
+  //   setWatched((watched) => [...watched, watchedMovie]);
+  // }
 
   return (
     <main className="main">
@@ -34,15 +47,25 @@ export default function Main({
           <EmptyMovies message="No movies found please search new movie" />
         )}
         {!loading && !error && movies.length > 0 && (
-          <MovieList movies={movies} />
+          <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
         )}
       </Box>
 
       {/* Watched movie list box on right */}
       <Box isOpen={isOpen2} setIsOpen={setIsOpen2}>
         <>
-          <Summary watched={watched} />
-          <WatchedList watched={watched} />
+          {selectedId ? (
+            <MovieDetails
+              selectedId={selectedId}
+              onCloseMovie={handleCloseMovie}
+              onAddWatchedMovie={addWatchedMovie}
+            />
+          ) : (
+            <>
+              <Summary watched={watched} />
+              <WatchedList watched={watched} />
+            </>
+          )}
         </>
       </Box>
     </main>

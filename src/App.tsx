@@ -1,18 +1,16 @@
 import { useEffect, useState } from "react";
 import type { Movie } from "./types/movie.type";
-import { tempWatchedData } from "./data/movie.data";
 import Navbar from "./components/navbar";
 import Main from "./components/main";
 import NumResults from "./components/num-results";
 import Search from "./components/search";
 import Logo from "./components/logo";
-import { fetchMovie } from "./services/movie-api.service";
+import { fetchMovies } from "./services/movie-api.service";
 
 export default function App() {
   // States
   const [query, setQuery] = useState("batman");
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [watched] = useState(tempWatchedData);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
 
@@ -29,7 +27,7 @@ export default function App() {
       try {
         setLoading(true);
         setError(null);
-        const movies = await fetchMovie(query);
+        const movies = await fetchMovies(query);
         setMovies(movies);
       } catch (error) {
         if (error instanceof Error) {
@@ -53,7 +51,7 @@ export default function App() {
         </>
       </Navbar>
 
-      <Main movies={movies} watched={watched} loading={loading} error={error} />
+      <Main movies={movies} loading={loading} error={error} />
     </>
   );
 }
