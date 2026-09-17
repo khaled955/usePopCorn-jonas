@@ -5,6 +5,9 @@ import StarRating from "./star-rating";
 import MovieDetailsSkeleton from "../skeletons/movie-details-skeleton";
 import ErrorMessage from "./error-message";
 import type { WatchedMovie as WatchedMovieType } from "../types/movie.type";
+import { MAIN_TITLE } from "../constants/app.constant";
+import { cleanValue } from "../utils/clean-values";
+import MoviePoster from "./movie-poster";
 
 type SelectedMovieProps = {
   selectedId: string | null;
@@ -24,8 +27,6 @@ export default function MovieDetails({
   const [error, setError] = useState<string | null>(null);
   const [rating, setRating] = useState(0);
 
-
-
   // Handlers
   function handleAddWatchedMovie() {
     const newMovie = {
@@ -40,11 +41,6 @@ export default function MovieDetails({
     onAddWatchedMovie(newMovie);
     onCloseMovie();
   }
-
-
-
-
-
 
   // Effects
   useEffect(() => {
@@ -68,6 +64,24 @@ export default function MovieDetails({
     fetchMovieDetails();
   }, [selectedId]);
 
+  useEffect(() => {
+    document.title = `movie | ${movieDetails?.Title || MAIN_TITLE}`;
+
+    return () => {
+      document.title = MAIN_TITLE;
+    };
+  }, [movieDetails?.Title]);
+
+  // Close by escape button
+  useEffect(() => {
+    function handleCloseByKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") onCloseMovie();
+    }
+    document.addEventListener("keydown", handleCloseByKeyDown);
+
+    return () => document.removeEventListener("keydown", handleCloseByKeyDown);
+  }, [onCloseMovie]);
+
   if (loading) return <MovieDetailsSkeleton />;
   if (error) return <ErrorMessage message={error} />;
 
@@ -89,34 +103,33 @@ export default function MovieDetails({
     (movie) => movie.imdbID === selectedId,
   );
 
-
   return (
     <div className="details">
       <header>
         <button className="btn-back" onClick={onCloseMovie}>
           &larr;
         </button>
-        <img src={Poster} alt={`Poster of ${Title}`} />
-
+        <MoviePoster src={Poster} title={Title} />
         <div className="details-overview">
           <h2>{Title}</h2>
           <p>
-            {Released} &bull; {Runtime}
+            {cleanValue(Released, "unknown year")} &bull; {Runtime}
           </p>
           <p>{Genre}</p>
           <p>
-            <span>⭐</span> {imdbRating} IMDB rating
+            <span>⭐</span> {cleanValue(imdbRating, "not available")} IMDB
+            rating
           </p>
         </div>
       </header>
-
 
       <section>
         {/* Rating */}
         <div className="rating">
           {isRatedBefore ? (
             <span>
-              You rated <strong>{Title}</strong> before {isRatedBefore.userRating} <span>⭐</span>
+              You rated <strong>{Title}</strong> before
+              {isRatedBefore.userRating} <span>⭐</span>
             </span>
           ) : (
             <>
@@ -130,9 +143,9 @@ export default function MovieDetails({
           )}
         </div>
         <p>
-          <em>{Plot}</em>
+          <em>{cleanValue(Plot, "")}</em>
         </p>
-        <p>Starring {Actors}</p>
+        <p>Starring {cleanValue(Actors, "not available")}</p>
         <p>Directed by {Director}</p>
       </section>
     </div>

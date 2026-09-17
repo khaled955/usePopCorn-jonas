@@ -30,7 +30,9 @@ body {
   padding: 2.4rem;
 }
 
-/* ******* */
+/* =========================
+   LAYOUT
+========================= */
 
 .nav-bar {
   display: grid;
@@ -50,29 +52,6 @@ body {
   justify-content: center;
 }
 
-/* Scrollbar width */
-.box::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-}
-
-/* Scrollbar track */
-.box::-webkit-scrollbar-track {
-  background: var(--color-background-900);
-  border-radius: 10px;
-}
-
-/* Scrollbar thumb */
-.box::-webkit-scrollbar-thumb {
-  background: var(--color-primary);
-  border-radius: 10px;
-}
-
-/* Hover */
-.box::-webkit-scrollbar-thumb:hover {
-  background: var(--color-primary-light);
-}
-
 .box {
   width: 42rem;
   max-width: 42rem;
@@ -81,11 +60,13 @@ body {
   overflow-y: auto;
   overflow-x: hidden;
   position: relative;
+
   scrollbar-width: thin;
   scrollbar-color: var(--color-primary) var(--color-background-900);
 }
 
-/* Chrome, Edge, Safari */
+/* Scrollbar */
+
 .box::-webkit-scrollbar {
   width: 10px;
   height: 10px;
@@ -104,6 +85,10 @@ body {
 .box::-webkit-scrollbar-thumb:hover {
   background: var(--color-primary-light);
 }
+
+/* =========================
+   LOADING / ERROR
+========================= */
 
 .loader {
   text-align: center;
@@ -119,7 +104,9 @@ body {
   padding: 4.8rem;
 }
 
-/* ******* */
+/* =========================
+   NAVBAR
+========================= */
 
 .logo {
   display: flex;
@@ -146,8 +133,6 @@ body {
   width: 40rem;
   transition: all 0.3s;
   color: var(--color-text);
-
-  /* background-color: var(--color-background-900); */
   background-color: var(--color-primary-light);
 }
 
@@ -166,6 +151,10 @@ body {
   font-size: 1.8rem;
 }
 
+/* =========================
+   BUTTONS
+========================= */
+
 .btn-toggle {
   position: absolute;
   top: 0.8rem;
@@ -182,10 +171,68 @@ body {
   z-index: 999;
 }
 
+.btn-delete {
+  position: absolute;
+  right: 5px;
+  height: 1.8rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  background-color: var(--color-red);
+  color: var(--color-background-900);
+  font-size: 0.9rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-delete:hover {
+  background-color: var(--color-red-dark);
+}
+
+.btn-add {
+  background-color: var(--color-primary);
+  color: var(--color-text);
+  border: none;
+  border-radius: 10rem;
+  font-size: 1.4rem;
+  padding: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.btn-add:hover {
+  background-color: var(--color-primary-light);
+}
+
+.btn-back {
+  position: absolute;
+  top: 0.6rem;
+  left: 0.6rem;
+  height: 3.2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: none;
+  background-color: #fff;
+  color: var(--color-background-500);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
+  font-family: sans-serif;
+  font-size: 2.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =========================
+   MOVIE LIST
+========================= */
+
 .list {
   list-style: none;
-  /* padding: 0.8rem 0; */
-  /* overflow: scroll; */
 }
 
 .list-watched {
@@ -200,7 +247,6 @@ body {
   column-gap: 2.4rem;
   font-size: 1.6rem;
   align-items: center;
-
   padding: 1.6rem 3.2rem;
   border-bottom: 1px solid var(--color-background-100);
 }
@@ -235,30 +281,24 @@ body {
   gap: 0.8rem;
 }
 
-.btn-delete {
-  position: absolute;
-  right: 5px;
+/* =========================
+   MOBILE TABS
+========================= */
 
-  height: 1.8rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: none;
-  background-color: var(--color-red);
-  color: var(--color-background-900);
-  font-size: 0.9rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
+.mobile-tabs {
+  display: none;
 }
 
-.btn-delete:hover {
-  background-color: var(--color-red-dark);
+.mobile-box {
+  display: contents;
 }
 
-/* ******* */
+/* =========================
+   SUMMARY
+========================= */
 
 .summary {
-  padding: 2.2rem 3.2rem 1.8rem 3.2rem;
+  padding: 2.2rem 3.2rem 1.8rem;
   border-radius: 0.9rem;
   background-color: var(--color-background-100);
   box-shadow: 0 1.2rem 2.4rem rgba(0, 0, 0, 0.2);
@@ -284,7 +324,9 @@ body {
   gap: 0.8rem;
 }
 
-/* ******* */
+/* =========================
+   MOVIE DETAILS
+========================= */
 
 .details {
   line-height: 1.4;
@@ -338,22 +380,6 @@ body {
   gap: 2.4rem;
 }
 
-.btn-add {
-  background-color: var(--color-primary);
-  color: var(--color-text);
-  border: none;
-  border-radius: 10rem;
-  font-size: 1.4rem;
-  padding: 1rem;
-  font-weight: bold;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-
-.btn-add:hover {
-  background-color: var(--color-primary-light);
-}
-
 .seconds {
   background-color: var(--color-background-100);
   width: 8rem;
@@ -364,33 +390,125 @@ body {
   margin-top: 2.4rem;
 }
 
-.btn-back {
-  position: absolute;
-  top: 0.6rem;
-  left: 0.6rem;
-  height: 3.2rem;
-  aspect-ratio: 1;
-  border-radius: 50%;
-  border: none;
-  /* background-color: var(--color-text); */
-  background-color: #fff;
-  color: var(--color-background-500);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.8);
-  font-family: sans-serif;
-  font-size: 2.4rem;
-  font-weight: bold;
-  cursor: pointer;
-  z-index: 999;
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
+  gap: 1.2rem;
+  padding: 4.8rem;
+  text-align: center;
+  font-size: 2rem;
+  color: var(--color-text-dark);
+}
+
+.empty span {
+  font-size: 4rem;
 }
 
 /* =========================
-   RESPONSIVE
+   MOVIE SKELETON
 ========================= */
 
-/* Tablets */
+.movie-skeleton {
+  pointer-events: none;
+}
+
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--color-background-100) 25%,
+    #495057 50%,
+    var(--color-background-100) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: 0.4rem;
+}
+
+.skeleton-poster {
+  width: 4rem;
+  height: 6rem;
+  grid-row: 1 / -1;
+}
+
+.skeleton-title {
+  width: 70%;
+  height: 1.8rem;
+}
+
+.skeleton-year-container {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.skeleton-icon {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.skeleton-year {
+  width: 5rem;
+  height: 1.4rem;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* =========================
+   MOVIE DETAILS SKELETON
+========================= */
+
+.details-skeleton {
+  pointer-events: none;
+}
+
+.details-skeleton-poster {
+  width: 33%;
+  min-height: 26rem;
+  border-radius: 0;
+}
+
+.details-skeleton-title {
+  width: 75%;
+  height: 2.6rem;
+  margin-bottom: 1rem;
+}
+
+.details-skeleton-text {
+  width: 100%;
+  height: 1.4rem;
+}
+
+.details-skeleton-medium {
+  width: 70%;
+}
+
+.details-skeleton-small {
+  width: 45%;
+}
+
+.details-skeleton-rating {
+  width: 100%;
+  height: 2.4rem;
+}
+
+/* =========================
+   TABLET
+========================= */
+
 @media (max-width: 900px) {
   body {
     padding: 1.6rem;
@@ -449,7 +567,10 @@ body {
   }
 }
 
-/* Mobile */
+/* =========================
+   MOBILE
+========================= */
+
 @media (max-width: 700px) {
   html {
     font-size: 56.25%;
@@ -480,11 +601,43 @@ body {
     font-size: 1.6rem;
   }
 
+  .mobile-tabs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.8rem;
+    margin-top: 1.2rem;
+  }
+
+  .mobile-tabs button {
+    border: none;
+    border-radius: 0.7rem;
+    padding: 1.2rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+    cursor: pointer;
+    background-color: var(--color-background-500);
+    color: var(--color-text);
+  }
+
+  .mobile-tabs button.active {
+    background-color: var(--color-primary);
+    color: #fff;
+  }
+
   .main {
     flex-direction: column;
     justify-content: flex-start;
     height: auto;
-    margin-top: 1.6rem;
+    margin-top: 1.2rem;
+  }
+
+  .mobile-box {
+    display: block;
+    width: 100%;
+  }
+
+  .mobile-box.mobile-hidden {
+    display: none;
   }
 
   .box {
@@ -521,9 +674,16 @@ body {
   .details section {
     padding: 2.4rem;
   }
+
+  .details-skeleton-poster {
+    width: 35%;
+  }
 }
 
-/* Small mobile */
+/* =========================
+   SMALL MOBILE
+========================= */
+
 @media (max-width: 480px) {
   body {
     padding: 0.8rem;
@@ -531,7 +691,6 @@ body {
 
   .nav-bar {
     gap: 1rem;
-
     border-radius: 0.7rem;
   }
 
@@ -603,123 +762,7 @@ body {
   .rating {
     padding: 1.6rem;
   }
-}
 
-/* Movie Skeleton */
-
-.movie-skeleton {
-  pointer-events: none;
-}
-
-.skeleton {
-  background: linear-gradient(
-    90deg,
-    var(--color-background-100) 25%,
-    #495057 50%,
-    var(--color-background-100) 75%
-  );
-  background-size: 200% 100%;
-  animation: skeleton-loading 1.5s infinite;
-  border-radius: 0.4rem;
-}
-
-.skeleton-poster {
-  width: 4rem;
-  height: 6rem;
-  grid-row: 1 / -1;
-}
-
-.skeleton-title {
-  width: 70%;
-  height: 1.8rem;
-}
-
-.skeleton-year-container {
-  display: flex;
-  align-items: center;
-  gap: 0.8rem;
-}
-
-.skeleton-icon {
-  width: 1.4rem;
-  height: 1.4rem;
-}
-
-.skeleton-year {
-  width: 5rem;
-  height: 1.4rem;
-}
-
-@keyframes skeleton-loading {
-  0% {
-    background-position: 200% 0;
-  }
-
-  100% {
-    background-position: -200% 0;
-  }
-}
-
-.empty {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.2rem;
-  padding: 4.8rem;
-  text-align: center;
-  font-size: 2rem;
-  color: var(--color-text-dark);
-}
-
-.empty span {
-  font-size: 4rem;
-}
-
-/* Movie Details Skeleton */
-
-.details-skeleton {
-  pointer-events: none;
-}
-
-.details-skeleton-poster {
-  width: 33%;
-  min-height: 26rem;
-  border-radius: 0;
-}
-
-.details-skeleton-title {
-  width: 75%;
-  height: 2.6rem;
-  margin-bottom: 1rem;
-}
-
-.details-skeleton-text {
-  width: 100%;
-  height: 1.4rem;
-}
-
-.details-skeleton-medium {
-  width: 70%;
-}
-
-.details-skeleton-small {
-  width: 45%;
-}
-
-.details-skeleton-rating {
-  width: 100%;
-  height: 2.4rem;
-}
-
-/* Mobile */
-@media (max-width: 700px) {
-  .details-skeleton-poster {
-    width: 35%;
-  }
-}
-
-@media (max-width: 480px) {
   .details-skeleton-poster {
     width: 100%;
     min-height: 32rem;
