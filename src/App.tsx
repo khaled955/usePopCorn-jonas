@@ -11,7 +11,7 @@ import MobileToggleButton from "./components/mobile-toggle-button";
 
 export default function App() {
   // States
-  const [query, setQuery] = useState("batman");
+  const [query, setQuery] = useState("");
   const [movies, setMovies] = useState<Movie[]>([]);
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);

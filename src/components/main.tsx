@@ -43,42 +43,7 @@ export default function Main({
   }
 
   return (
-    // <main className="main">
-    //   {/* Movie list box on left */}
-    //   <Box isOpen={isOpen1} setIsOpen={setIsOpen1}>
-    //     {loading && <MovieListSkeleton />}
-    //     {!loading && error && <ErrorMessage message={error} />}
-    //     {!loading && !error && movies.length === 0 && (
-    //       <EmptyMovies message="No movies found please search new movie" />
-    //     )}
-    //     {!loading && !error && movies.length > 0 && (
-    //       <MovieList movies={movies} onSelectMovie={handleSelectMovie} />
-    //     )}
-    //   </Box>
-
-    //   {/* Watched movie list box on right */}
-    //   <Box isOpen={isOpen2} setIsOpen={setIsOpen2}>
-    //     <>
-    //       {selectedId ? (
-    //         <MovieDetails
-    //           selectedId={selectedId}
-    //           onCloseMovie={handleCloseMovie}
-    //           onAddWatchedMovie={addWatchedMovie}
-    //           watchedMovie={watched}
-    //         />
-    //       ) : (
-    //         <>
-    //           <Summary watched={watched} />
-    //           <WatchedList
-    //             watched={watched}
-    //             onDeleteMovie={deleteWatchedMovie}
-    //           />
-    //         </>
-    //       )}
-    //     </>
-    //   </Box>
-    // </main>
-
+    
     <main className="main">
       {/* Movies */}
       <div
