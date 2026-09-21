@@ -25,6 +25,7 @@ export default function App() {
       if (query.trim().length < 3) {
         setMovies([]);
         setError(null);
+        setLoading(false);
         return;
       }
 
@@ -41,7 +42,8 @@ export default function App() {
           setError(error.message);
         }
       } finally {
-        setLoading(false);
+        // Only stop loading if this request wasn't cancelled
+        if (!controller.signal.aborted) setLoading(false);
       }
     }
 
